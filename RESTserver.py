@@ -2,18 +2,19 @@ from flask import Flask, request, jsonify, send_file
 import datetime
 import os 
 import time
+import json
 
 app = Flask(__name__)
 
 @app.route("/turnOn")
 def turnOn():
 	os.system("python3 ./controllerTuya.py EUheu1592047867994rwfxKGqBr1eTvr9 EUheu1592047867994rwfxKHdzG8hJ3Oh 44152035483fda90cb1e on")
-	return "Luce accesa",200
+	return json.dumps({"status": 200, "message": "Luce accesa"})
 
 @app.route("/turnOff")
 def tutnOff():
 	os.system("python3 ./controllerTuya.py EUheu1592047867994rwfxKGqBr1eTvr9 EUheu1592047867994rwfxKHdzG8hJ3Oh 44152035483fda90cb1e off")
-	return "Luce spenta",200
+	return json.dumps({"status": 200, "message": "Luce spenta"})
 
 @app.route("/takePic")
 def takePic():
@@ -33,3 +34,6 @@ def takeVideo():
 	os.system("MP4Box -add {} -fps 30 {}".format(video, filename))
 	return send_file(filename, mimetype='video/mp4'), 200
 
+if __name__ == "__main__":
+	app.run(ssl_context="adhoc")
+	app.run()

@@ -14,8 +14,8 @@ def getAccessToken():
 	auth = requests.post(
 		"https://px1.tuyaus.com/homeassistant/auth.do",
 		data={
-			"userName": "",
-			"password": "",
+			"userName": "dennyore@gmail.com",
+			"password": "Sbagliata94",
 			"countryCode": "44",
 			"bizType": "smart_life",
 			"from": "tuya",

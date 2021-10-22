@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+button.p-button svg{
+    margin-right: 5px;
+}
+
+.p-card .p-card-title {
+    border-bottom: 1px solid white;
+}
