@@ -1,7 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+h1 {
+    color: white;
+}
+
+.p-card-title h6 {
+    font-size: 1.2rem;
+}
+
+.header-bar {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.header-bar > div.col-12 > h1 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 
 button.p-button svg{
     margin-right: 5px;
@@ -9,4 +28,13 @@ button.p-button svg{
 
 .p-card .p-card-title {
     border-bottom: 1px solid white;
+}
+
+p-card > div.p-card {
+    border: 1px solid white;
+}
+
+p-card {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

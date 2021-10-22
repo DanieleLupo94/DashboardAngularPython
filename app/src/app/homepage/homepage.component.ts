@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FileSaverService } from 'ngx-filesaver';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -9,43 +10,54 @@ import { MessageService } from 'primeng/api';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient, private messageService: MessageService, private _FileSaverService: FileSaverService) { }
 
   ngOnInit(): void {
+    document.getElementsByTagName('body')[0].style.backgroundColor = "#131313";
   }
 
   accendiLuce() {
     this.http.get("http://localhost:5000/turnOn").toPromise().then((resp: any) => {
       this.showMessageByResponseMessage(resp);
+    }).catch(resp => {
+      console.error("Errore: ", resp);
+      this.showErrorMessage();
     });
   }
 
   spegniLuce() {
     this.http.get("http://localhost:5000/turnOff").toPromise().then((resp: any) => {
       this.showMessageByResponseMessage(resp);
+    }).catch(resp => {
+      console.error("Errore: ", resp);
+      this.showErrorMessage();
     });
   }
 
   scattaFoto() {
-    this.http.get("http://localhost:5000/takePic").toPromise().then((resp: any) => {
-      console.log("Dal server: ", resp);
-      //this.showMessageByResponseMessage(resp);
+    this.http.get("http://localhost:5000/takePic", { responseType: "blob" }).toPromise().then((resp: any) => {
+      this._FileSaverService.save(resp, "pic.png");
+    }).catch(resp => {
+      console.error("Errore: ", resp);
+      this.showErrorMessage();
     });
   }
 
   registraVideo() {
-    this.http.get("http://localhost:5000/takeVideo").toPromise().then((resp: any) => {
-      console.log("Dal server: ", resp);
-      //this.showMessageByResponseMessage(resp);
+    this.http.get("http://localhost:5000/takeVideo", { responseType: "blob" }).toPromise().then((resp: any) => {
+      this._FileSaverService.save(resp, "video.mp4");
+    }).catch(resp => {
+      console.error("Errore: ", resp);
+      this.showErrorMessage();
     });
   }
 
   showMessageByResponseMessage(resp: any) {
-    if (resp.status == 200) {
-      this.messageService.add({ severity: 'success', summary: '', detail: resp.message });
-    } else {
-      this.messageService.add({ severity: 'error', summary: '', detail: resp.message });
-    }
+    this.messageService.add({ severity: 'success', summary: '', detail: resp.message });
+  }
+
+  showErrorMessage() {
+    this.messageService.add({ severity: 'error', summary: '', detail: "Impossibile effettuare l'azione desiderata" });
   }
 
 }
