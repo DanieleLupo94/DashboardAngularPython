@@ -20,7 +20,6 @@ export class HomepageComponent implements OnInit {
     if (this.baseUrl.split(":").length > 2) {
       this.baseUrl = this.baseUrl.substring(0, this.baseUrl.lastIndexOf(":"))
     }
-    console.log("Base ", this.baseUrl);
   }
 
   accendiLuce() {
