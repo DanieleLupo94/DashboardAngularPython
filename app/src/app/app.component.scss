@@ -10,6 +10,12 @@ div.center-screen {
     background: rgba(255,255,0,0.3);
 }
 
-:host ::ng-deep {
-    
+hr {
+    background-color: whitesmoke;
+}
+
+h3.text-center {
+    color: whitesmoke;
+    text-align: center;
+    padding-top: 2%;
 }
