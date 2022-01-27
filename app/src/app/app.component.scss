@@ -5,3 +5,11 @@ div.center-screen {
 .row {
     margin-right: 0px;
 }
+
+.p-ripple.ripple-yellow .p-ink {
+    background: rgba(255,255,0,0.3);
+}
+
+:host ::ng-deep {
+    
+}

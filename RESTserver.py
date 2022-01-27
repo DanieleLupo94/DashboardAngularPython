@@ -16,7 +16,7 @@ def tutnOff():
 	os.system("python3 ./controllerTuya.py EUheu1592047867994rwfxKGqBr1eTvr9 EUheu1592047867994rwfxKHdzG8hJ3Oh 44152035483fda90cb1e off")
 	return json_response({"message": "Luce spenta"})
 
-@app.route("/takePic")
+@app.route("/takePic/<numero>")
 def takePic():
 	now = datetime.datetime.now()
 	filename = now.strftime("%Y%m%d%H%M%S")
@@ -24,7 +24,7 @@ def takePic():
 	os.system("raspistill -w 1000 -h 1000 -t 2000 -n -dt -e png -o {}".format(filename))
 	return send_file(filename, mimetype='image/gif'), 200, {'Access-Control-Allow-Origin': '*'}
 	
-@app.route("/takeVideo")
+@app.route("/takeVideo/<numero>")
 def takeVideo():
 	now = datetime.datetime.now()
 	filename = now.strftime("%Y%m%d%H%M%S")
@@ -38,5 +38,4 @@ def json_response(payload, status=200):
 	return (json.dumps(payload), status, {'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'})
 
 if __name__ == "__main__":
-	app.run(ssl_context="adhoc")
-	app.run()
+	app.run(host="0.0.0.0")
