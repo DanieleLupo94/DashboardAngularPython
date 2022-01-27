@@ -17,7 +17,7 @@ def tutnOff():
 	return json_response({"message": "Luce spenta"})
 
 @app.route("/takePic/<numero>")
-def takePic():
+def takePic(numero = 0):
 	now = datetime.datetime.now()
 	filename = now.strftime("%Y%m%d%H%M%S")
 	filename = "{}.png".format(filename)
@@ -25,7 +25,7 @@ def takePic():
 	return send_file(filename, mimetype='image/gif'), 200, {'Access-Control-Allow-Origin': '*'}
 	
 @app.route("/takeVideo/<numero>")
-def takeVideo():
+def takeVideo(numero = 0):
 	now = datetime.datetime.now()
 	filename = now.strftime("%Y%m%d%H%M%S")
 	video = "{}.h264".format(filename)
